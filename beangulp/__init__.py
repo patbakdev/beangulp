@@ -120,10 +120,8 @@ def _extract(ctx, src, output, existing, reverse, no_sections, failfast, quiet):
               help='Stop processing at the first error.')
 @click.option('--date-sep', '-ds', default='.', type=str,
               help='Separator between date and rest of filename.')
-@click.option('--strip-date', '-sd', is_flag=True,
-              help='Remove existing date from filename if it exists.')
 @click.pass_obj
-def _archive(ctx, src, destination, dry_run, overwrite, failfast, date_sep, strip_date):
+def _archive(ctx, src, destination, dry_run, overwrite, failfast, date_sep):
     """Archive documents.
 
     Walk the SRC list of files or directories and move each file
@@ -161,7 +159,7 @@ def _archive(ctx, src, destination, dry_run, overwrite, failfast, date_sep, stri
             # Signal processing of this document.
             log(' ...', nl=False)
 
-            destpath = archive.filepath(importer, filename, date_sep, strip_date)
+            destpath = archive.filepath(importer, filename, date_sep)
 
             # Prepend destination directory path.
             destpath = os.path.join(destination, destpath)
